@@ -2,6 +2,7 @@
 
 Overview:
 - [signals.go](#signalsgo)
+- [uuid.go](#uuidgo)
 - [Dockerfile.TEMPLATE](#dockerfiletemplate)
 
 
