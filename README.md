@@ -51,6 +51,41 @@ The Go code demonstrates how to manage context and system signals in a concurren
 
 This code would be applicable in a server application where you have multiple long-running tasks that need to be managed and could be interrupted by system signals. For instance, a web scraper that runs multiple scraping tasks in parallel but needs to shut down gracefully when receiving a termination signal.
 
+## [uuid.go](cmd/uuid/uuid.go)
+
+The Go code snippet is designed to showcase the generation of unique identifiers (UUIDs) using various third-party libraries. It aims to demonstrate the differences in UUID formats and configurations provided by these libraries.
+
+### Core Functionalities:
+
+1. **Multiple Library Support:**
+    
+    - Imports multiple third-party libraries specialized in generating UUIDs.
+    - Example: `gouid`, `ulid`, `nanoid`, and `goid`.
+
+2. **Formatted Output:**
+    
+    - Utilizes a helper function `print` to display the UUIDs in a tabular format.
+    - Example: `print("lib", "config", "uuid")`
+
+3. **UUID Generation:**
+    
+    - Generates UUIDs using different configurations and libraries.
+    - Example: `gouid.String(16, gouid.LowerCaseAlphaNum)` generates a 16-character UUID consisting of lowercase alphabets and numbers.
+
+4. **Showcase Function:**
+    
+    - Central function that orchestrates the UUID generation and output display.
+    - Calls the `print` function to display each UUID along with its generating library and configuration.
+
+5. **Error Handling:**
+    
+    - Although not explicitly shown, libraries like `nanoid` return errors that can be handled. The current code ignores these errors.
+    - Example: `nid, _ := nanoid.New()`
+
+### Use-Case Example:
+
+This code would be useful in a scenario where you need to evaluate different UUID generation libraries for your project. For instance, if you're building a distributed system where each node or transaction requires a unique identifier, you could run this code to see which library produces UUIDs that best fit your requirements.
+
 
 
 ## [Dockerfile.TEMPLATE](Dockerfile.TEMPLATE)

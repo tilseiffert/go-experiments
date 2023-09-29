@@ -1,0 +1,9 @@
+github.com/aidarkhanov/nanoid/v2 v2.0.5 h1:HLx5RyDuvOZ6YxlhYTxSU8Il+q7xVKmXM62MfSxziN0=
+github.com/aidarkhanov/nanoid/v2 v2.0.5/go.mod h1:YF/U48D1yA3AoGGUdRrCV95J/KJBShvR9TyLqQwdtlI=
+github.com/jakehl/goid v1.1.0 h1:c08GO8z16wWJtfQhyiD8BQRFkpf1oDxaPmA+uYAG+50=
+github.com/jakehl/goid v1.1.0/go.mod h1:V6bQh+tr2Oay5WHL0jmTTJWrABYIO+cs4/P6e1prV1o=
+github.com/oklog/ulid/v2 v2.1.0 h1:+9lhoxAP56we25tyYETBBY1YLA2SaoLvUFgrP2miPJU=
+github.com/oklog/ulid/v2 v2.1.0/go.mod h1:rcEKHmBBKfef9DhnvX7y1HZBYxjXb0cP5ExxNsTT1QQ=
+github.com/pborman/getopt v0.0.0-20170112200414-7148bc3a4c30/go.mod h1:85jBQOZwpVEaDAr341tbn15RS4fCAsIst0qp7i8ex1o=
+github.com/twharmon/gouid v0.5.2 h1:fqFUx700Ishb4dZaXpRv95CGGGR1CBuCkjM0t62XAxw=
+github.com/twharmon/gouid v0.5.2/go.mod h1:m1SyQo0sYYbukI1yNZ1WRk980fV2XWBuYGAtMo/AmQ8=
