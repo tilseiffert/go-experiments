@@ -89,6 +89,18 @@ This code would be useful in a scenario where you need to evaluate different UUI
 
 
 
+## [dynamodb.go](cmd/dynamodb/dynamodb.go)
+
+Requirement (env)
+
+```
+# export $(grep -v '^#' secrets_dynamodb.env | xargs)
+AWS_ACCESS_KEY_ID=XXXXX
+AWS_SECRET_ACCESS_KEY=XXXXX
+AWS_REGION=eu-central-1
+TABLENAME=go-experiments-dynamodb
+```
+
 ## [Dockerfile.TEMPLATE](Dockerfile.TEMPLATE)
 
 

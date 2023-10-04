@@ -19,3 +19,7 @@
 
 # Go workspace file
 go.work
+
+
+# Ignore all local secrets.env files
+secrets*.env
