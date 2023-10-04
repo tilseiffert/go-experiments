@@ -1,6 +1,6 @@
 module github.com/tilseiffert/go-experiments
 
-go 1.21.1
+go 1.21
 
 require (
 	github.com/aidarkhanov/nanoid/v2 v2.0.5
