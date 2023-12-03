@@ -55,7 +55,7 @@ func (s *session) handleRoot(w http.ResponseWriter, r *http.Request) {
 	printDebugLine()
 
 	logger := logging.LoggerAddName(&s.logger, "handleRoot")
-	fmt.Printf("handleRoot called...")
+	fmt.Printf("handleRoot called...\n")
 	logger.V(logging.LvlTrace).Info("handleRoot called...")
 
 	token, err, redirect := auth.CheckAuth(&s.auth, w, r, logger)

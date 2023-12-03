@@ -23,6 +23,7 @@ type AuthProvider struct {
 	Config   oauth2.Config
 }
 
+// validateToken validates the given token via AuthProvider.Provider.UserInfo(ctx, oauth2.StaticTokenSource(token))
 func (a *AuthProvider) validateToken(ctx context.Context, token *oauth2.Token, logger *logr.Logger) error {
 
 	logger = logging.LoggerAddName(logger, "validateToken")
