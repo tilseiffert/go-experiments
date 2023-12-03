@@ -15,7 +15,7 @@ import (
 func Showcase() {
 	// Helper function to print the library name, configuration, and generated UUID in a formatted manner
 	print := func(lib string, name string, uuid string) {
-		fmt.Printf("%-30s %-25s %s\n", lib, name, uuid)
+		fmt.Printf("%-35s %-25s %s\n", lib, name, uuid)
 	}
 
 	// Print table headers

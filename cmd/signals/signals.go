@@ -14,25 +14,27 @@ This example effectively demonstrates how to use context for cancellation and ho
 
 // Import required packages
 import (
-	"context"   // For managing timeouts and cancellation signals
-	"fmt"       // For formatted I/O operations
-	"os"        // For interacting with operating system functionalities
-	"os/signal" // For signal handling
-	"sync"      // For synchronization primitives
-	"syscall"   // For system call invocations
-	"time"      // For time operations
-)
+	"context" // For managing timeouts and cancellation signals
+	// For formatted I/O operations
+	// For interacting with operating system functionalities
+	// For signal handling
+	"sync" // For synchronization primitives
+	// For system call invocations
+	"time" // For time operations
 
-// log function prints a formatted log message with the current time and function name
-func log(msg string, function string) {
-	fmt.Printf("%s: %s() %s\n", time.Now().Format(time.RFC3339), function, msg)
-}
+	"github.com/go-logr/logr"
+	"github.com/tilseiffert/go-experiments/internal/logging"
+	"github.com/tilseiffert/go-experiments/lib/signals"
+)
 
 // Entry point of the program
 func main() {
+
+	logger := logging.CreateLogger()
+
 	// Log the start of the main function
-	log("Hello 👋", "main")
-	defer log("Bye 👋", "main")
+	logger.Info("Hello 👋")
+	defer logger.Info("Bye 👋")
 
 	// Create a new context with cancellation capabilities
 	ctx, cancel := context.WithCancel(context.Background())
@@ -42,69 +44,50 @@ func main() {
 
 	// Defer the cancel function to ensure resources are freed
 	defer func() {
-		log("deferred cleanup, trigger cancel of context", "main")
+		logger.Info("deferred cleanup, trigger cancel of context")
 		cancel() // Cancel the context
 	}()
 
 	// Start the signal handling function
-	log("Calling handleSignals()", "main")
-	handleSignals(ctx, cancel)
+	logger.Info("Calling handleSignals()")
+	signals.HandleSignals(ctx, cancel, &logger)
 
 	// Start the doSomething function as a goroutine
-	log("Calling doSomething()", "main")
+	logger.Info("Calling doSomething()")
 	wg.Add(1) // Increment the WaitGroup counter
-	go doSomething(ctx, &wg)
+	go doSomething(ctx, &wg, &logger)
 
 	// Wait for the context to be done (e.g., cancelled)
-	log("Waiting for context to be done...", "main")
+	logger.Info("Waiting for context to be done...")
 	<-ctx.Done()
 
 	// Wait for all goroutines to finish
-	log("Waiting for goroutines to finish...", "main")
+	logger.Info("Context done. Waiting for goroutines to finish...")
 	wg.Wait()
 
 }
 
-// handleSignals listens for OS signals and cancels the context if an interrupt is received
-func handleSignals(ctx context.Context, cancel context.CancelFunc) {
-	log("handleSignals started.", "handleSignals")
-
-	// Create a channel to receive OS signals
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
-
-	// Start a goroutine to handle incoming signals
-	go func() {
-		select {
-		case sig := <-c:
-			// Log and cancel the context if an interrupt signal is received
-			log(fmt.Sprintf("Received signal: %s. Initiating shutdown...", sig), "handleSignals")
-			cancel()
-		case <-ctx.Done():
-			// Exit if the context is done
-			log("Context done. Exiting signal handler.", "handleSignals")
-		}
-	}()
-}
-
 // doSomething simulates a long-running task
-func doSomething(ctx context.Context, wg *sync.WaitGroup) {
-	log("doSomething started.", "doSomething")
+func doSomething(ctx context.Context, wg *sync.WaitGroup, logger *logr.Logger) {
+
+	logger = logging.LoggerAddName(logger, "doSomething")
+
+	logger.V(1).Info("doSomething started.")
 
 	// Decrement the WaitGroup counter when the function exits
 	defer wg.Done()
-	defer log("doSomething exited.", "doSomething")
+	defer logger.V(1).Info("doSomething exited.")
 
 	// Infinite loop to simulate work
 	for {
 		select {
 		case <-ctx.Done():
 			// Log and exit if the context is done
-			log("doSomething received context done signal.", "doSomething")
+			logger.Info("doSomething received context done signal.")
 			return
 		default:
 			// Log and continue working
-			log("doSomething running...", "doSomething")
+			logger.V(2).Info("doSomething running...")
 			time.Sleep(1 * time.Second)
 		}
 	}

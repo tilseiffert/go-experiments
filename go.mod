@@ -5,8 +5,11 @@ go 1.21
 require (
 	github.com/aidarkhanov/nanoid/v2 v2.0.5
 	github.com/aws/aws-sdk-go v1.45.19
+	github.com/go-logr/logr v1.2.4
+	github.com/go-logr/zerologr v1.2.3
 	github.com/jakehl/goid v1.1.0
 	github.com/oklog/ulid/v2 v2.1.0
+	github.com/rs/zerolog v1.31.0
 	github.com/spf13/viper v1.17.0
 	github.com/tilseiffert/go-tools-config v0.3.0
 	github.com/twharmon/gouid v0.5.2
@@ -14,6 +17,8 @@ require (
 
 require (
 	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-isatty v0.0.19 // indirect
 	github.com/pquerna/cachecontrol v0.2.0 // indirect
 	github.com/sagikazarmark/locafero v0.3.0 // indirect
 	github.com/sagikazarmark/slog-shim v0.1.0 // indirect
